@@ -10,7 +10,9 @@ Pod::Spec.new do |s|
   s.name         = "DSHPopupContainer"
   s.version      = "0.0.1"
   s.summary      = "A short description of DSHPopupContainer."
-  s.description  = <<-DESC 弹层容器 DESC
+  s.description  = <<-DESC
+                    弹层容器
+                    DESC
   s.homepage     = "https://github.com/568071718/DSHPopupContainer"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.platform     = :ios, "8.0"
