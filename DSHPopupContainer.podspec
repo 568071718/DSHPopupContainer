@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
                     DESC
   s.homepage     = "https://github.com/568071718/DSHPopupContainer"
   s.license      = { :type => "MIT", :file => "LICENSE" }
+  s.author       = { "lu" => "568071718@qq.com" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/568071718/DSHPopupContainer.git", :tag => s.version }
   s.source_files  = "Classes", "Classes/**/*.{h,m}"
