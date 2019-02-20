@@ -9,9 +9,9 @@
 Pod::Spec.new do |s|
   s.name         = "DSHPopupContainer"
   s.version      = "0.0.1"
-  s.summary      = "A short description of DSHPopupContainer."
+  s.summary      = "iOS弹层容器"
   s.description  = <<-DESC
-                    弹层容器
+                    用来自定义弹层动画，管理弹层的小工具。
                     DESC
   s.homepage     = "https://github.com/568071718/DSHPopupContainer"
   s.license      = { :type => "MIT", :file => "LICENSE" }
