@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "DSHPopupContainer"
-  s.version      = "0.0.1"
+  s.version      = "1.0.1"
   s.summary      = "iOS弹层容器"
   s.description  = <<-DESC
                     用来自定义弹层动画，管理弹层的小工具。
