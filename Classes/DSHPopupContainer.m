@@ -17,28 +17,49 @@
 - (DSHPopupContainer *)container {return objc_getAssociatedObject(self, _cmd);}
 @end
 
-
 @interface DSHPopupContainer ()
 
 @property (weak ,nonatomic ,readonly) UIView *containerView;
 @property (strong ,nonatomic ,readonly) UIView <DSHCustomPopupView>*customPopupView;
-@property (assign ,nonatomic ,readonly) DSHPopupContainerBackgroundMode backgroundMode;
+@property (strong ,nonatomic ,readonly) UIControl *backgroudControl;
 @end
 
 @implementation DSHPopupContainer
 
-- (id)initWithCustomPopupView:(UIView<DSHCustomPopupView> *)customPopupView {
-    return [self initWithCustomPopupView:customPopupView containerView:nil backgroundMode:DSHPopupContainerBackgroundModeDefault];
-}
-- (id)initWithCustomPopupView:(UIView <DSHCustomPopupView>*)customPopupView containerView:(UIView *)containerView backgroundMode:(DSHPopupContainerBackgroundMode)backgroundMode; {
-    if (![customPopupView isKindOfClass:[UIView class]]) return nil;
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:(UIBlurEffectStyle)backgroundMode];
-    if (backgroundMode == DSHPopupContainerBackgroundModeDefault) {
-        blurEffect = nil;
++ (DSHPopupContainer *)findContainerFromView:(UIView *)view; {
+    if (view) {
+        for (DSHPopupContainer *subview in view.subviews) {
+            if ([subview isKindOfClass:[DSHPopupContainer class]]) {
+                return subview;
+            }
+        }
     }
-    self = [super initWithEffect:blurEffect];
+    return nil;
+}
+
++ (__kindof UIView <DSHCustomPopupView>*)findPopupViewFromView:(UIView *)view class:(Class)aClass; {
+    if (view && aClass) {
+        DSHPopupContainer *container = [DSHPopupContainer findContainerFromView:view];
+        if (container) {
+            for (UIView *subview in container.subviews) {
+                if ([subview conformsToProtocol:@protocol(DSHCustomPopupView)] && [subview isMemberOfClass:aClass]) {
+                    return (UIView <DSHCustomPopupView>*)subview;
+                }
+            }
+        }
+    }
+    return nil;
+}
+
+- (id)initWithCustomPopupView:(UIView<DSHCustomPopupView> *)customPopupView {
+    return [self initWithCustomPopupView:customPopupView containerView:nil];
+}
+- (id)initWithCustomPopupView:(UIView <DSHCustomPopupView>*)customPopupView containerView:(UIView *)containerView; {
+    if (![customPopupView isKindOfClass:[UIView class]]) return nil;
+    self = [super initWithFrame:containerView.bounds];
     if (self) {
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.backgroundColor = nil;
         _containerView = containerView;
         if (!_containerView) {
             _containerView = [UIApplication sharedApplication].keyWindow;
@@ -46,16 +67,17 @@
         
         _customPopupView = customPopupView;
         _customPopupView.container = self;
-        _backgroundMode = backgroundMode;
         _showAnimationDuration = .25;
         _dismissAnimationDuration = .25;
         _maskEnabled = YES;
+        _maskColor = nil;
         
-        UIControl *backgroudControl = [[UIControl alloc] init];
-        backgroudControl.autoresizingMask = self.autoresizingMask;
-        backgroudControl.frame = self.bounds;
-        [backgroudControl addTarget:self action:@selector(clickedBackgroudControl:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:backgroudControl];
+        _backgroudControl = [[UIControl alloc] init];
+        _backgroudControl.autoresizingMask = self.autoresizingMask;
+        _backgroudControl.frame = self.bounds;
+        _backgroudControl.backgroundColor = _maskColor;
+        [_backgroudControl addTarget:self action:@selector(clickedBackgroudControl:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_backgroudControl];
     } return self;
 }
 
@@ -69,13 +91,13 @@
     CAKeyframeAnimation *anim = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
     anim.values = @[@(0) ,@(1)];
     anim.duration = _showAnimationDuration;
-    [self.layer addAnimation:anim forKey:nil];
+    [self.backgroudControl.layer addAnimation:anim forKey:nil];
     
     if ([_delegate respondsToSelector:@selector(popupContainer:willShowCustomView:)]) {
         [_delegate popupContainer:self willShowCustomView:_customPopupView];
     }
     
-    [self.contentView addSubview:_customPopupView];
+    [self addSubview:_customPopupView];
     if ([_customPopupView respondsToSelector:@selector(willPopupContainer:)]) {
         [_customPopupView willPopupContainer:self];
     }
@@ -103,6 +125,19 @@
 - (void)clickedBackgroudControl:(id)sender {
     if (_maskEnabled) {
         [self dismiss];
+    }
+}
+
+- (void)setMaskColor:(UIColor *)maskColor {
+    _maskColor = maskColor;
+    _backgroudControl.backgroundColor = _maskColor;
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    if (backgroundColor) {
+        self.maskColor = backgroundColor;
+    } else {
+        [super setBackgroundColor:backgroundColor];
     }
 }
 
