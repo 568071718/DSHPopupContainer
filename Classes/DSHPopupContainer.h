@@ -36,7 +36,7 @@
 @property (assign ,nonatomic) NSTimeInterval showAnimationDuration;
 @property (assign ,nonatomic) NSTimeInterval dismissAnimationDuration;
 @property (strong ,nonatomic) UIColor *maskColor; // 蒙层背景色 默认:nil
-@property (assign ,nonatomic) BOOL maskEnabled; // 蒙层交互开关(点击蒙层自动隐藏，默认:YES)
+@property (assign ,nonatomic) BOOL autoDismissWhenClickedBackground; // 蒙层交互开关(点击蒙层自动隐藏，默认:YES)
 @property (weak ,nonatomic) id <DSHPopupContainerDelegate>delegate;
 
 + (DSHPopupContainer *)findContainerFromView:(UIView *)view;

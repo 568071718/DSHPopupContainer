@@ -69,7 +69,7 @@
         _customPopupView.container = self;
         _showAnimationDuration = .25;
         _dismissAnimationDuration = .25;
-        _maskEnabled = YES;
+        _autoDismissWhenClickedBackground = YES;
         _maskColor = nil;
         
         _backgroudControl = [[UIControl alloc] init];
@@ -123,7 +123,7 @@
 }
 
 - (void)clickedBackgroudControl:(id)sender {
-    if (_maskEnabled) {
+    if (_autoDismissWhenClickedBackground) {
         [self dismiss];
     }
 }

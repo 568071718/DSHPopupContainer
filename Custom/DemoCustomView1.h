@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DSHPopupContainer.h"
 
-@interface DemoCustomView1 : UIView <DSHCustomPopupView>
+@interface DemoCustomView1 : UIView <DSHCustomPopupView ,UICollectionViewDelegateFlowLayout ,UICollectionViewDataSource>
 
+@property (strong ,nonatomic ,readonly) UIPageControl *pageControl;
+@property (strong ,nonatomic ,readonly) UICollectionView *collectionView;
 @end
