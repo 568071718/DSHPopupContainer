@@ -116,7 +116,7 @@
         [_customPopupView willDismissContainer:self duration:_dismissAnimationDuration];
     }
     [UIView animateWithDuration:_dismissAnimationDuration animations:^{
-        self.alpha = 0;
+        self.backgroudControl.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
