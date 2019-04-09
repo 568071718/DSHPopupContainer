@@ -39,6 +39,9 @@
 @property (assign ,nonatomic) BOOL autoDismissWhenClickedBackground; // 蒙层交互开关(点击蒙层自动隐藏，默认:YES)
 @property (weak ,nonatomic) id <DSHPopupContainerDelegate>delegate;
 
-+ (DSHPopupContainer *)findContainerFromView:(UIView *)view;
-+ (__kindof UIView <DSHCustomPopupView>*)findPopupViewFromView:(UIView *)view class:(Class)aClass;
++ (DSHPopupContainer *)findContainerFromView:(UIView *)view DEPRECATED_MSG_ATTRIBUTE("Please use findContainersFromView:");
++ (__kindof UIView <DSHCustomPopupView>*)findPopupViewFromView:(UIView *)view class:(Class)aClass DEPRECATED_MSG_ATTRIBUTE("Please use findPopupViewsFromView::");
+
++ (NSArray <DSHPopupContainer *>*)findContainersFromView:(UIView *)view;
++ (NSArray <__kindof UIView <DSHCustomPopupView>*>*)findPopupViewsFromView:(UIView *)view class:(Class)aClass;
 @end

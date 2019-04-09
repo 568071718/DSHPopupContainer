@@ -20,32 +20,46 @@
 @interface DSHPopupContainer ()
 
 @property (weak ,nonatomic ,readonly) UIView *containerView;
-@property (strong ,nonatomic ,readonly) UIView <DSHCustomPopupView>*customPopupView;
+@property (strong ,nonatomic) UIView <DSHCustomPopupView>*customPopupView;
 @property (strong ,nonatomic ,readonly) UIControl *backgroudControl;
 @end
 
 @implementation DSHPopupContainer
 
 + (DSHPopupContainer *)findContainerFromView:(UIView *)view; {
+    return [self findContainersFromView:view].firstObject;
+}
+
++ (__kindof UIView <DSHCustomPopupView>*)findPopupViewFromView:(UIView *)view class:(Class)aClass; {
+    return [self findPopupViewsFromView:view class:aClass].firstObject;
+}
+
++ (NSArray <DSHPopupContainer *>*)findContainersFromView:(UIView *)view; {
     if (view) {
+        NSMutableArray *result = [NSMutableArray array];
         for (DSHPopupContainer *subview in view.subviews) {
             if ([subview isKindOfClass:[DSHPopupContainer class]]) {
-                return subview;
+                [result addObject:subview];
             }
         }
+        return result;
     }
     return nil;
 }
 
-+ (__kindof UIView <DSHCustomPopupView>*)findPopupViewFromView:(UIView *)view class:(Class)aClass; {
++ (NSArray <__kindof UIView <DSHCustomPopupView>*>*)findPopupViewsFromView:(UIView *)view class:(Class)aClass; {
     if (view && aClass) {
-        DSHPopupContainer *container = [DSHPopupContainer findContainerFromView:view];
-        if (container) {
-            for (UIView *subview in container.subviews) {
-                if ([subview conformsToProtocol:@protocol(DSHCustomPopupView)] && [subview isMemberOfClass:aClass]) {
-                    return (UIView <DSHCustomPopupView>*)subview;
+        NSArray *array = [self findContainersFromView:view];
+        if (array.count > 0) {
+            NSMutableArray *result = [NSMutableArray array];
+            for (DSHPopupContainer *container in array) {
+                for (UIView *subview in container.subviews) {
+                    if ([subview conformsToProtocol:@protocol(DSHCustomPopupView)] && [subview isMemberOfClass:aClass]) {
+                        [result addObject:subview];
+                    }
                 }
             }
+            return result;
         }
     }
     return nil;
@@ -118,6 +132,7 @@
     [UIView animateWithDuration:_dismissAnimationDuration animations:^{
         self.backgroudControl.alpha = 0;
     } completion:^(BOOL finished) {
+        [self.customPopupView removeFromSuperview]; self.customPopupView = nil;
         [self removeFromSuperview];
     }];
 }
@@ -134,11 +149,10 @@
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
-    if (backgroundColor) {
-        self.maskColor = backgroundColor;
-    } else {
+    if (!backgroundColor) {
         [super setBackgroundColor:backgroundColor];
     }
+    self.maskColor = backgroundColor;
 }
 
 @end
