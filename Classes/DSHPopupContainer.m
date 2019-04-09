@@ -17,6 +17,13 @@
 - (DSHPopupContainer *)container {return objc_getAssociatedObject(self, _cmd);}
 @end
 
+@interface _DSHContainerBackgroundView : UIControl
+@property (assign ,nonatomic) BOOL penetrable;
+@end
+@implementation _DSHContainerBackgroundView
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {UIView *view = [super hitTest:point withEvent:event]; if (_penetrable && view == self) return nil; return view;}
+@end
+
 @interface DSHPopupContainer ()
 
 @property (weak ,nonatomic ,readonly) UIView *containerView;
@@ -85,11 +92,13 @@
         _dismissAnimationDuration = .25;
         _autoDismissWhenClickedBackground = YES;
         _maskColor = nil;
+        _penetrable = NO;
         
-        _backgroudControl = [[UIControl alloc] init];
+        _backgroudControl = [[_DSHContainerBackgroundView alloc] init];
         _backgroudControl.autoresizingMask = self.autoresizingMask;
         _backgroudControl.frame = self.bounds;
         _backgroudControl.backgroundColor = _maskColor;
+        [(_DSHContainerBackgroundView *)_backgroudControl setPenetrable:_penetrable];
         [_backgroudControl addTarget:self action:@selector(clickedBackgroudControl:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_backgroudControl];
     } return self;
@@ -155,4 +164,10 @@
     self.maskColor = backgroundColor;
 }
 
+- (void)setPenetrable:(BOOL)penetrable {
+    _penetrable = penetrable;
+    ((_DSHContainerBackgroundView *)_backgroudControl).penetrable = _penetrable;
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {UIView *view = [super hitTest:point withEvent:event]; if (_penetrable && view == self) return nil; return view;}
 @end
