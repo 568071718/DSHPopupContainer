@@ -18,6 +18,9 @@
 		893B43AD221D23B5008B870D /* DSHPopupContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 893B43AB221D23B5008B870D /* DSHPopupContainer.m */; };
 		893B43B1221D2444008B870D /* DemoCustomView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 893B43B0221D2444008B870D /* DemoCustomView1.m */; };
 		893B43B4221D2451008B870D /* DemoCustomView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 893B43B3221D2451008B870D /* DemoCustomView2.m */; };
+		895C8632227EAB6500EDD356 /* DSHAlertObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 895C8631227EAB6500EDD356 /* DSHAlertObject.m */; };
+		895C8635227EABF300EDD356 /* DSHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 895C8634227EABF300EDD356 /* DSHAlertView.m */; };
+		895C8638227EB1F300EDD356 /* DSHAlertViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 895C8637227EB1F300EDD356 /* DSHAlertViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,12 @@
 		893B43B0221D2444008B870D /* DemoCustomView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoCustomView1.m; sourceTree = "<group>"; };
 		893B43B2221D2451008B870D /* DemoCustomView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoCustomView2.h; sourceTree = "<group>"; };
 		893B43B3221D2451008B870D /* DemoCustomView2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoCustomView2.m; sourceTree = "<group>"; };
+		895C8630227EAB6500EDD356 /* DSHAlertObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSHAlertObject.h; sourceTree = "<group>"; };
+		895C8631227EAB6500EDD356 /* DSHAlertObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSHAlertObject.m; sourceTree = "<group>"; };
+		895C8633227EABF300EDD356 /* DSHAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSHAlertView.h; sourceTree = "<group>"; };
+		895C8634227EABF300EDD356 /* DSHAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSHAlertView.m; sourceTree = "<group>"; };
+		895C8636227EB1F300EDD356 /* DSHAlertViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSHAlertViewCell.h; sourceTree = "<group>"; };
+		895C8637227EB1F300EDD356 /* DSHAlertViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSHAlertViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				893B43AA221D23B5008B870D /* Classes */,
+				895C8639227ED40B00EDD356 /* AlertView */,
 				893B43AE221D2429008B870D /* Custom */,
 				893B4377221D2377008B870D /* Demo */,
 				893B4390221D2379008B870D /* DemoTests */,
@@ -161,6 +171,19 @@
 				893B43B3221D2451008B870D /* DemoCustomView2.m */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		895C8639227ED40B00EDD356 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				895C8633227EABF300EDD356 /* DSHAlertView.h */,
+				895C8634227EABF300EDD356 /* DSHAlertView.m */,
+				895C8630227EAB6500EDD356 /* DSHAlertObject.h */,
+				895C8631227EAB6500EDD356 /* DSHAlertObject.m */,
+				895C8636227EB1F300EDD356 /* DSHAlertViewCell.h */,
+				895C8637227EB1F300EDD356 /* DSHAlertViewCell.m */,
+			);
+			path = AlertView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,10 +318,13 @@
 			files = (
 				893B43B1221D2444008B870D /* DemoCustomView1.m in Sources */,
 				893B43AD221D23B5008B870D /* DSHPopupContainer.m in Sources */,
+				895C8638227EB1F300EDD356 /* DSHAlertViewCell.m in Sources */,
 				893B437D221D2377008B870D /* ViewController.m in Sources */,
+				895C8635227EABF300EDD356 /* DSHAlertView.m in Sources */,
 				893B43B4221D2451008B870D /* DemoCustomView2.m in Sources */,
 				893B4388221D2378008B870D /* main.m in Sources */,
 				893B437A221D2377008B870D /* AppDelegate.m in Sources */,
+				895C8632227EAB6500EDD356 /* DSHAlertObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

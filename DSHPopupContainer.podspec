@@ -18,6 +18,15 @@ Pod::Spec.new do |s|
   s.author       = { "lu" => "568071718@qq.com" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/568071718/DSHPopupContainer.git", :tag => s.version }
-  s.source_files  = "Classes", "Classes/**/*.{h,m}"
   s.requires_arc = true
+  
+  s.subspec 'Base' do |ss|
+      ss.source_files = 'Classes'
+  end
+  
+  s.subspec 'AlertView' do |ss|
+      ss.dependency 'DSHPopupContainer/Base'
+      ss.source_files = 'AlertView'
+  end
+  
 end

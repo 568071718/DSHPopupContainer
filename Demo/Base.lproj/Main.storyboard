@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,23 +19,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6c-gY-9te">
-                                <rect key="frame" x="166" y="318.5" width="42" height="30"/>
+                                <rect key="frame" x="166.5" y="318.5" width="42" height="30"/>
                                 <state key="normal" title="示例 1"/>
                                 <connections>
                                     <action selector="clickActions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="erk-yR-ohh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaG-lu-hHo">
-                                <rect key="frame" x="165" y="363.5" width="44" height="30"/>
+                                <rect key="frame" x="165.5" y="363.5" width="44" height="30"/>
                                 <state key="normal" title="示例 2"/>
                                 <connections>
                                     <action selector="clickActions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z7N-fE-JPG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5a-QU-Jxx">
+                                <rect key="frame" x="165.5" y="408.5" width="44" height="30"/>
+                                <state key="normal" title="示例 3"/>
+                                <connections>
+                                    <action selector="clickActions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CpJ-VN-v5J"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="T6c-gY-9te" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="16O-bF-GbG"/>
+                            <constraint firstItem="z5a-QU-Jxx" firstAttribute="top" secondItem="oaG-lu-hHo" secondAttribute="bottom" constant="15" id="4ND-nj-lt0"/>
+                            <constraint firstItem="z5a-QU-Jxx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6oH-Of-iSR"/>
                             <constraint firstItem="oaG-lu-hHo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7Km-6M-wCy"/>
                             <constraint firstItem="T6c-gY-9te" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8az-vY-om2"/>
                             <constraint firstItem="oaG-lu-hHo" firstAttribute="top" secondItem="T6c-gY-9te" secondAttribute="bottom" constant="15" id="DdQ-JA-PZV"/>
