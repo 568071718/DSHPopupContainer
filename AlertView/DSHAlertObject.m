@@ -35,7 +35,7 @@
 + (DSHAlertObject *)makeTitle:(NSString *)text; {
     DSHAlertObject *object = [[DSHAlertObject alloc] init];
     object.text = text;
-    object.insets = UIEdgeInsetsMake(15, 15, 15, 15);
+    object.insets = UIEdgeInsetsMake(15, 15, 7.5, 15);
     object.font = [UIFont systemFontOfSize:17];
     object.type = DSHAlertTitleObject;
     object.color = [UIColor blackColor];
@@ -45,7 +45,7 @@
 + (DSHAlertObject *)makeMessage:(NSString *)text; {
     DSHAlertObject *object = [[DSHAlertObject alloc] init];
     object.text = text;
-    object.insets = UIEdgeInsetsMake(15, 15, 15, 15);
+    object.insets = UIEdgeInsetsMake(7.5, 15, 15, 15);
     object.font = [UIFont systemFontOfSize:14];
     object.type = DSHAlertMessageObject;
     object.color = [UIColor lightGrayColor];

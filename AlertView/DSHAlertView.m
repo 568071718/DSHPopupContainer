@@ -27,6 +27,8 @@
         self.layer.cornerRadius = 10.f;
         self.layer.masksToBounds = YES;
         
+        _lineMode = DSHAlertViewTitleAndMessageLineHidden;
+        
         NSMutableArray *list1 = [NSMutableArray array];
         NSMutableArray *list2 = [NSMutableArray array];
         for (DSHAlertObject *obj in objects) {
@@ -40,13 +42,11 @@
         _options = [list2 copy];
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.minimumLineSpacing = 1;
-        layout.minimumInteritemSpacing = 1;
         _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
         _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor colorWithRed:244 / 255.f green:244 / 255.f blue:244 / 255.f alpha:1];
+        _collectionView.backgroundColor = [UIColor colorWithRed:233 / 255.f green:233 / 255.f blue:233 / 255.f alpha:1];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.scrollEnabled = NO;
@@ -98,18 +98,6 @@
     return nil;
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section; {
-    if (section == 0) {
-        return UIEdgeInsetsMake(0, 0, 0, 0);
-    }
-    if (section == 1) {
-        if (_options.count > 0) {
-            return UIEdgeInsetsMake(1, 0, 0, 0);
-        }
-    }
-    return UIEdgeInsetsZero;
-}
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath; {
     if (indexPath.section == 0) {
         DSHAlertObject *rowData = _objects[indexPath.row];
@@ -126,8 +114,8 @@
         DSHAlertObject *rowData = _options[indexPath.row];
         CGFloat width = collectionView.frame.size.width;
         if (_options.count == 2) {
-            UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)collectionViewLayout;
-            width = (width - layout.minimumInteritemSpacing) * .5;
+            CGFloat minimumInteritemSpacing = [self collectionView:collectionView layout:collectionViewLayout minimumInteritemSpacingForSectionAtIndex:indexPath.section];
+            width = (width - minimumInteritemSpacing) * .5;
         }
         NSAttributedString *string = rowData.attributedText;
         if (!string) {
@@ -146,6 +134,50 @@
             [_delegate alertView:self clickedOptionWithOptionIndex:indexPath.row];
         }
     }
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section; {
+    if (section == 0) {
+        return UIEdgeInsetsZero;
+    }
+    if (section == 1) {
+        if (_options.count > 0) {
+            if (_lineMode & DSHAlertViewOptionLineHidden) {
+                return UIEdgeInsetsZero;
+            } else {
+                return UIEdgeInsetsMake(1, 0, 0, 0);
+            }
+        }
+    }
+    return UIEdgeInsetsZero;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section; {
+    if (section == 0) {
+        if (_lineMode & DSHAlertViewTitleAndMessageLineHidden) {
+            return 0;
+        }
+    }
+    if (section == 1) {
+        if (_lineMode & DSHAlertViewOptionLineHidden) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section; {
+    if (section == 0) {
+        if (_lineMode & DSHAlertViewTitleAndMessageLineHidden) {
+            return 0;
+        }
+    }
+    if (section == 1) {
+        if (_lineMode & DSHAlertViewOptionLineHidden) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 #pragma mark -

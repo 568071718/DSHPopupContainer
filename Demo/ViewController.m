@@ -74,7 +74,7 @@
         {
             DSHAlertObject *title = [DSHAlertObject makeTitle:@"温馨提示"];
             title.color = [UIColor redColor];
-            DSHAlertObject *message = [DSHAlertObject makeMessage:@"内容房间了圣诞节福利世纪东方决胜巅峰你口味放开那能收到富士康毒奶粉交论文了就开始放假了的会计法"];
+            DSHAlertObject *message = [DSHAlertObject makeMessage:@"内容房间了圣诞节福利世纪东方决胜巅峰你口味放开那能收到"];
             DSHAlertObject *option1 = [DSHAlertObject makeOption:@"好的"];
             DSHAlertObject *option2 = [DSHAlertObject makeOption:@"测试"];
             option2.color = [UIColor brownColor];

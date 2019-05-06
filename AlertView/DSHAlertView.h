@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DSHAlertObject.h"
 
+typedef NS_ENUM(NSUInteger ,DSHAlertViewLineMode) {
+    DSHAlertViewLineModeNone                = 0,
+    DSHAlertViewTitleAndMessageLineHidden   = 1 << 0, // 隐藏标题和内容间的分隔线 (默认)
+    DSHAlertViewOptionLineHidden            = 1 << 1, // 隐藏选项区域的分隔线
+};
+
 @class DSHAlertView;
 @protocol DSHAlertViewDelegate <NSObject>
 @optional
@@ -19,6 +25,7 @@
 
 - (id)initWithObjects:(NSArray <DSHAlertObject *>*)objects;
 @property (weak ,nonatomic) id <DSHAlertViewDelegate>delegate;
+@property (assign ,nonatomic) DSHAlertViewLineMode lineMode;
 - (void)show;
 - (void)dismiss;
 
